@@ -1,0 +1,41 @@
+@startuml
+
+title Диаграмма контейнеров банка "Стандарт" - Передача ставок в кол-центр
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(BODepositManager, "Менеджер Бэк-офиса по депозитам")
+Person(CallOperator, "Оператор кол-центра")
+Person(ExtCallOperator, "Оператор партнерского кол-центра")
+
+Container_Boundary(Bank, "Банк Стандарт") {
+    Container(FECallCenter, "Frontend кол-центра")
+    Container(FEAbs, "Frontend АБС")
+    Container(ApiGateway, "Api Gateway", "Шлюз для направления запросов на соответствующие сервисы")
+    Container(BECallCenter, "Backend кол-центра")
+    Container(BEAbs, "Backend АБС")
+    Container(ReplicationService, "Сервис репликации данных")
+    Container(SFTPUpdateService, "Сервис обновления ставок в SFTP-хранилище")
+    ContainerDb(DBAbs, "БД АБС", "Oracle", "Хранит данные о заявках, ставках, бухгалтерии")
+    ContainerDb(DBCall, "БД Кол-центра", "PostgreSQL", "Хранит данные о заявках")
+    SystemDb(SFTP, "Хранилище файлов SFTP")
+}
+
+System_Ext(ExtCallCenter, "Система партнерского кол-центра")
+
+Rel(BODepositManager, FEAbs, "Указывает ставки")
+Rel(CallOperator, FECallCenter, "Запрашивает ставки")
+Rel(FECallCenter, ApiGateway, "Отправляет запросы")
+Rel(FEAbs, ApiGateway, "Отправляет запросы")
+Rel(ApiGateway, BECallCenter, "Отправляет запросы")
+Rel(ApiGateway, BEAbs, "Отправляет запросы")
+Rel(ExtCallOperator, ExtCallCenter, "Запрашивает ставки")
+Rel(ExtCallCenter, SFTP, "Получает данные по ставкам")
+Rel(BEAbs, DBAbs, "Читает, записывает данные")
+Rel(BECallCenter, DBCall, "Читает данные")
+Rel(ReplicationService, DBAbs, "Реплицирует данные")
+Rel(ReplicationService, DBCall, "Реплицирует данные")
+Rel(SFTPUpdateService, SFTP, "Обновляет данные по ставкам")
+Rel(SFTPUpdateService, DBAbs, "Получает данные по ставкам")
+
+@enduml

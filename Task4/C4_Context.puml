@@ -1,0 +1,21 @@
+@startuml
+
+title Диаграмма контекста банка "Стандарт" - Передача ставок в кол-центр
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(BODepositManager, "Менеджер Бэк-офиса по депозитам")
+Person(CallOperator, "Оператор кол-центра")
+Person(ExtCallOperator, "Оператор партнерского кол-центра")
+
+System(Bank, "Банк")
+System_Ext(ExtCallCenter, "Система партнерского кол-центра")
+SystemDb(SFTP, "Хранилище файлов SFTP")
+
+Rel(BODepositManager, Bank, "Указывает ставки")
+Rel(CallOperator, Bank, "Запрашивает ставки")
+Rel(ExtCallOperator, ExtCallCenter, "Запрашивает ставки")
+Rel(ExtCallCenter, SFTP, "Получает данные по ставкам")
+Rel(Bank, SFTP, "Обновляет данные по ставкам")
+
+@enduml
