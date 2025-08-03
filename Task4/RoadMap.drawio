@@ -31,7 +31,7 @@
         <mxCell id="pSlgX9m7UJtlrja5Czmu-6" value="Реализовать кэширование справочной информации" style="shape=rect;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=18;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=5;rounded=0;" parent="3D7FDG2aXA9G618_Kong-1" vertex="1">
           <mxGeometry x="-2450" y="-1600" width="280" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="pSlgX9m7UJtlrja5Czmu-9" value="Backend сайта и интернет-банка" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontSize=18;" parent="3D7FDG2aXA9G618_Kong-1" vertex="1">
+        <mxCell id="pSlgX9m7UJtlrja5Czmu-9" value="Микросервис ставок и депозитов" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontSize=18;" parent="3D7FDG2aXA9G618_Kong-1" vertex="1">
           <mxGeometry x="-3240" y="-1790" width="120" height="270" as="geometry" />
         </mxCell>
         <mxCell id="Wdx1KfvCNMvMVhz92Etj-3" value="" style="shape=rect;fillColor=#fff2cc;strokeColor=none;fontSize=24;html=1;whiteSpace=wrap;align=left;verticalAlign=top;spacing=5;rounded=0;" vertex="1" parent="3D7FDG2aXA9G618_Kong-1">
