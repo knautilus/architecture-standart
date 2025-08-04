@@ -17,7 +17,7 @@ Container_Boundary(Bank, "Банк Стандарт") {
     Container(ReplicationService, "Сервис репликации данных")
     Container(SFTPUpdateService, "Сервис обновления ставок в SFTP-хранилище")
     ContainerDb(DBAbs, "БД АБС", "Oracle", "Хранит данные о заявках, ставках, бухгалтерии")
-    ContainerDb(DBCall, "БД Кол-центра", "PostgreSQL", "Хранит данные о заявках")
+    ContainerDb(DBCall, "БД Кол-центра", "PostgreSQL", "Хранит данные о заявках и ставках")
     SystemDb(SFTP, "Хранилище файлов SFTP")
 }
 
