@@ -1,0 +1,27 @@
+@startuml
+
+title Диаграмма контекста банка "Стандарт"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(Client, "Клиент банка")
+Person(FOManager, "Менеджер Фронт-офиса")
+Person(BODepositManager, "Менеджер Бэк-офиса по депозитам")
+Person(BOCreditManager, "Менеджер Бэк-офиса по кредитам")
+Person(CallOperator, "Оператор кол-центра")
+
+System(Bank, "Банк")
+
+System_Ext(Telecom, "Телеком-оператор")
+
+Rel(Client, FOManager, "Подает заявку")
+Rel(Client, Bank, "Смотрит информацию о банке и доступные депозиты, подает заявку")
+Rel(CallOperator, Bank, "Обрабатывает заявку")
+Rel(CallOperator, Client, "Предлагает особые условия, приглашает прийти в отделение для идентификации")
+Rel(FOManager, Bank, "Запрашивает ставку, размещает маркетинговую информацию, создает депозит, загружает документы")
+Rel(BODepositManager, Bank, "Обрабатывает заявки, определяет ставку")
+Rel(BOCreditManager, Bank, "Анализирует уровень кредитного риска относительно клиентов")
+Rel(Bank, Telecom, "Отправляет СМС с решением по депозиту")
+Rel(Telecom, Client, "Отправляет СМС")
+
+@enduml

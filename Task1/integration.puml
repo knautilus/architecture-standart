@@ -1,0 +1,41 @@
+@startuml
+
+title Диаграмма интеграции приложений банка "Стандарт"
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(Client, "Клиент банка")
+Person(FOManager, "Менеджер Фронт-офиса")
+Person(BODepositManager, "Менеджер Бэк-офиса по депозитам")
+Person(BOCreditManager, "Менеджер Бэк-офиса по кредитам")
+Person(CallOperator, "Оператор кол-центра")
+
+System(Email, "Email")
+System(ExcelEmail, "Excel, Email")
+System(CallCenter, "Кол-центр")
+System(SMSGateway, "CМС Шлюз")
+System(ABS, "АБС")
+System(Site, "Сайт")
+System(InternetBank, "Интернет банк")
+
+System_Ext(Telecom, "Телеком-оператор")
+
+Rel(Client, FOManager, "Подает заявку")
+Rel(Client, CallCenter, "Подает заявку")
+Rel(Client, InternetBank, "Заказывает дебетовые карты, осуществляет платежи")
+Rel(Client, Site, "Смотрит информацию о банке")
+Rel(CallOperator, CallCenter, "Обрабатывает заявку")
+Rel(CallOperator, ABS, "Передает готовую заявку")
+Rel(FOManager, ExcelEmail, "Запрашивает ставку")
+Rel(FOManager, Site, "Размещает маркетинговую информацию")
+Rel(FOManager, ABS, "Создает депозит, загружает документы")
+Rel(BODepositManager, Email, "Запрашивает согласование специальной ставки")
+Rel(BOCreditManager, Email, "Передает данные по кредитному риску")
+Rel(BOCreditManager, ABS, "Анализирует уровень кредитного риска")
+Rel(BODepositManager, ExcelEmail, "Отправляет ставку")
+Rel(BODepositManager, ABS, "Обрабатывает заявки и определяет ставку")
+Rel(ABS, SMSGateway, "Отправляет СМС с решением по депозиту")
+Rel(SMSGateway, Telecom, "Отправляет СМС")
+Rel(Telecom, Client, "Отправляет СМС")
+
+@enduml
